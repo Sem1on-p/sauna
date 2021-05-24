@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block body%}
+<center>
+    <h1>Разработка эскизного проекта сауны</h1>
+</center>
+<p style="color: black; font-size: 1.5em">Предлагаем одно-два планировочное решение сауны. Согласовываем. Делаем проработку выбранного варианта в который входят:</p>
+<center style="color: black; font-size: 1.5em">1.План с размерами;</center>
+<center style="color: black; font-size: 1.5em">2.Несколько 3D изображений;</center>
+<center style="color: black; font-size: 1.5em">3.Перечень оборудования два-три варианта;</center>
+<center style="color: black; font-size: 1.5em">4.Список необходимых отделочных материалов.</center>
+<br>
+<p style="color: black; font-size: 1.5em">Стоимость: 3000 ₽ за эскизный проект. Если разрабатываем три варианта планировочных решений, то стоимость: 5000 ₽. При дальнейшем заказе строительства сауны у нас: проект <font color="red">Бесплатно</font>. Оплаченные ранее деньги идут в счет аванса по договору на строительство.</p>
+<hr>
+<style type="text/css">
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    grid-template-rows: repeat(3, 33%);
+}
+
+.grid > * {
+    background-color: #ffbf94;
+    border-radius: 5px;
+    margin: 1px;
+}
+
+img{
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+p{ padding-left: 5px;
+    padding-right: 5px;
+}
+
+.oblast-1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+</style>
+{% for i in projects %}
+    <center>
+        <h1>{{ i.title }}</h1>
+    </center>
+    <p>{{ i.description }}</p>
+    <div class="grid">
+        <div class="oblast-1">
+            <img src="{{ i.main_img.url }}">
+        </div>
+        {% for a in i.img_list %}
+            {% if a %}
+                <div>
+                    <img src="{{ a.url }}">
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endfor %}
+{% endblock %}
